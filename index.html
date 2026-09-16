@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +7,39 @@
     <meta name="description" content="Landing page profissional, moderna e estratégica por apenas R$ 119,90. Transforme visitantes em clientes com a Marcondes Mídia. Oferta por tempo limitado.">
     <meta property="og:description" content="Landing pages profissionais, modernas e estratégicas por R$ 119,90.">
     <meta property="og:title" content="Site ou Landing Page | Marcondes Mídia">
-    <!-- Tailwind CDN for fast prototyping and high visual fidelity -->
+    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     },
                     colors: {
                         brand: {
-                            dark: '#0F172A',
+                            dark: '#0B0F19',
+                            cardDark: '#111827',
                             light: '#F8FAFC',
-                            green: '#22C55E',
-                            greenHover: '#16A34A',
+                            green: '#10B981',
+                            greenHover: '#059669',
+                            emerald: '#059669',
+                            accent: '#F59E0B'
+                        }
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'bounce-subtle': 'bounceSubtle 2s infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 25px rgba(16, 185, 129, 0.6), 0 0 50px rgba(16, 185, 129, 0.2)' },
+                            '50%': { boxShadow: '0 0 35px rgba(16, 185, 129, 0.9), 0 0 70px rgba(16, 185, 129, 0.4)' },
+                        },
+                        bounceSubtle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-4px)' },
                         }
                     }
                 }
@@ -31,80 +48,109 @@
     </script>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #F8FAFC;
             color: #0F172A;
+            overflow-x: hidden;
         }
 
-        /* Background tecnológico sutil para a seção principal */
-        .hero-section {
+        /* Efeito de iluminação suave nos CTAs */
+        .btn-cta-primary {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-cta-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-cta-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(16, 185, 129, 0.45);
+        }
+
+        .btn-cta-primary:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* Background com grid tecnológico */
+        .hero-bg {
+            background-color: #0B0F19;
             background-image:
+                radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 100px 100px, 100px 100px;
-            position: relative;
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+        }
+
+        /* Sombra especial para cards de preço e portfólio */
+        .card-hover-effect {
+            transition: all 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.15);
         }
 
         .evaluation-section {
             position: relative;
             overflow: hidden;
-            background-color: #0b2948;
+            background-color: #070A12;
             background-image:
-                linear-gradient(rgba(148, 190, 224, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(148, 190, 224, 0.1) 1px, transparent 1px);
-            background-size: 48px 48px, 48px 48px;
-            box-shadow: inset 0 0 100px rgba(34, 197, 94, 0.15);
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 32px 32px, 32px 32px;
         }
 
         .evaluation-card {
-            position: relative;
-            z-index: 1;
-            border: 1px solid rgba(148, 190, 224, 0.22);
-            background: rgba(15, 23, 42, 0.9);
-            box-shadow: 0 24px 70px rgba(2, 12, 27, 0.38), 0 0 30px rgba(34, 197, 94, 0.2);
-            border-radius: 16px;
-            border: 2px solid rgba(34, 197, 94, 0.1);
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(16, 185, 129, 0.15);
         }
 
         .evaluation-input {
-            background: rgba(30, 41, 59, 0.92) !important;
-            border-color: rgba(148, 163, 184, 0.28) !important;
-            transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+            background: rgba(31, 41, 55, 0.8) !important;
+            border: 1px solid rgba(75, 85, 99, 0.5) !important;
+            color: #ffffff !important;
+            transition: all 0.2s ease;
         }
 
         .evaluation-input:focus {
-            border-color: #22c55e !important;
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.14);
-            transform: translateY(-1px);
+            border-color: #10B981 !important;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25) !important;
+            background: rgba(31, 41, 55, 1) !important;
         }
 
-        .preview-box {
-            display: none;
-            border: 1px solid rgba(34, 197, 94, 0.42);
-            background: rgba(20, 83, 45, 0.3);
-        }
-
-        .preview-box.is-visible {
-            display: block;
-        }
-
-        /* Botão flutuante de WhatsApp */
         .whatsapp-float {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            height: 54px;
-            background-color: #22C55E;
+            bottom: 24px;
+            right: 24px;
+            height: 56px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             border-radius: 9999px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 0 20px;
-            box-shadow: 0 4px 16px rgba(34, 197, 94, 0.4);
+            gap: 10px;
+            padding: 0 22px;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
             z-index: 999;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
             text-decoration: none;
             color: white;
             font-weight: 800;
@@ -113,331 +159,498 @@
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.5);
-            background-color: #16A34A;
+            transform: scale(1.06) translateY(-3px);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
         }
 
-        .whatsapp-float svg {
-            width: 22px;
-            height: 22px;
-            fill: currentColor;
+        .badge-pulse {
+            position: relative;
+        }
+        .badge-pulse::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 9999px;
+            background: rgba(16, 185, 129, 0.4);
+            z-index: -1;
+            animation: pulse 2s infinite;
         }
     </style>
 </head>
 <body class="bg-brand-light text-brand-dark min-h-screen flex flex-col antialiased">
-    <!-- Top Alert Banner -->
-    <div class="bg-amber-500 text-white text-center py-2 px-4 text-sm font-bold">
-        🔥 Oferta de lançamento — R$ 119,90 por tempo limitado · vagas desta semana
+
+    <!-- Top Alert Banner com contador de urgência -->
+    <div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-white text-center py-2.5 px-4 text-xs md:text-sm font-bold flex items-center justify-center gap-2 shadow-inner">
+        <span class="flex h-2 w-2 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+        </span>
+        <span>🔥 Oferta de lançamento — <strong>R$ 119,90</strong> por tempo limitado · <u>Apenas 3 vagas restantes esta semana</u></span>
     </div>
+
     <!-- Header / Navbar -->
-    <header class="border-b border-slate-200 bg-white sticky top-0 z-50 shadow-sm">
-        <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-            <span class="text-2xl font-extrabold tracking-tight text-brand-dark">Marcondes Mídia</span>
-            <a href="https://wa.me/554896029392" class="bg-brand-green hover:bg-brand-greenHover text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition duration-200 shadow-md">
+    <header class="border-b border-slate-200/80 bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm transition-all">
+        <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-green to-emerald-700 flex items-center justify-center text-white font-black text-xl shadow-md group-hover:scale-105 transition-transform">
+                    M
+                </div>
+                <span class="text-xl md:text-2xl font-black tracking-tight text-brand-dark">Marcondes<span class="text-brand-green">Mídia</span></span>
+            </a>
+
+            <a href="https://wa.me/554896029392" target="_blank" class="bg-slate-100 hover:bg-emerald-50 text-slate-800 hover:text-brand-green border border-slate-200 hover:border-brand-green/30 px-4 py-2 rounded-full text-xs md:text-sm font-bold flex items-center gap-2 transition-all duration-200">
+                <svg class="w-4 h-4 text-brand-green" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                <span class="hidden sm:inline">Falar no WhatsApp:</span>
                 <span>(48) 9602-9392</span>
             </a>
         </div>
     </header>
 
     <main class="flex-grow">
-        <!-- Hero Section -->
-        <section class="max-w-4xl mx-auto px-4 py-16 text-center">
-            <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">Promoção válida só esta semana</span>
-            <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-brand-dark mt-6 mb-4 max-w-3xl mx-auto leading-tight">
-                Sua landing page profissional por apenas <span class="text-brand-green">R$ 119,90</span>
-            </h2>
-            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
-                Transforme visitantes em clientes com uma página moderna, rápida e feita para vender o seu serviço.
-            </p>
+        <!-- Hero Section com Dark Theme tecnológico -->
+        <section class="hero-bg text-white py-20 md:py-24 px-4 text-center border-b border-slate-800 relative">
+            <div class="max-w-4xl mx-auto relative z-10">
+                <!-- Badge Prova Social -->
+                <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full mb-8 backdrop-blur-sm shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Mais de 50+ Landing Pages Entregues com Sucesso</span>
+                </div>
 
-            <!-- Price Box -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xl max-w-md mx-auto mb-8 relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">76% OFF</div>
-                <p class="text-slate-400 line-through text-sm">De R$ 497,00 por apenas</p>
-                <p class="text-5xl font-black text-brand-dark my-2">R$ 119,90</p>
-                <p class="text-sm text-slate-500 font-medium">Pagamento único · você economiza R$ 377,10</p>
-            </div>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mt-2 mb-6 max-w-4xl mx-auto leading-[1.15]">
+                    Sua Landing Page Profissional por apenas <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">R$ 119,90</span>
+                </h1>
 
-            <!-- CTA Button -->
-            <a href="https://pay.kiwify.com.br/g4df72A" class="inline-block bg-brand-green hover:bg-brand-greenHover text-white text-lg md:text-xl font-extrabold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 w-full sm:w-auto uppercase tracking-wide">
-                QUERO MINHA LANDING PAGE AGORA
-            </a>
+                <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto font-medium leading-relaxed">
+                    Transforme visitantes em clientes pagantes com uma estrutura moderna, ultra rápida e otimizada para gerar vendas no WhatsApp.
+                </p>
 
-            <!-- Sub CTA benefits -->
-            <div class="flex flex-wrap justify-center gap-6 mt-8 text-sm text-slate-500 font-medium">
-                <span class="flex items-center gap-1.5">✓ Garantia de 7 dias</span>
-                <span class="flex items-center gap-1.5">✓ Entrega em 48h</span>
-                <span class="flex items-center gap-1.5">✓ Vagas limitadas</span>
+                <!-- Box de Oferta/Preço Interativo -->
+                <div class="bg-brand-cardDark/90 border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl max-w-md mx-auto mb-10 relative overflow-hidden backdrop-blur-md">
+                    <div class="absolute top-0 right-0 bg-gradient-to-l from-red-600 to-red-500 text-white text-xs font-extrabold px-4 py-1.5 rounded-bl-xl uppercase tracking-wider shadow-md">
+                        76% OFF HOJE
+                    </div>
+                    <p class="text-slate-400 line-through text-sm font-semibold mb-1">De R$ 497,00 por apenas</p>
+                    <div class="flex items-center justify-center gap-1 my-2">
+                        <span class="text-2xl font-bold text-emerald-400">R$</span>
+                        <span class="text-5xl md:text-6xl font-black text-white tracking-tight">119,90</span>
+                    </div>
+                    <div class="inline-block bg-slate-800/80 border border-slate-700 rounded-lg px-3 py-1 text-xs text-slate-300 font-medium">
+                        💳 Pagamento único · Sem mensalidade · Economize R$ 377,10
+                    </div>
+                </div>
+
+                <!-- Botão CTA Principal de Alta Conversão -->
+                <div class="max-w-md mx-auto space-y-4">
+                    <a href="https://pay.kiwify.com.br/g4df72A" target="_blank" class="btn-cta-primary animate-pulse-glow text-white text-lg sm:text-xl font-black py-4 px-8 rounded-2xl shadow-2xl w-full flex items-center justify-center gap-3 uppercase tracking-wider group text-center">
+                        <span>QUERO MINHA LANDING PAGE AGORA</span>
+                        <svg class="w-6 h-6 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+
+                    <p class="text-xs text-slate-400 flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 11.37C2.268 11.884 2.802 12 3.19 12h13.62c.388 0 .922-.116 1.024-.63.263-1.33.208-2.834-.23-4.108C16.892 5.2 14.887 4 12 4s-4.892 1.2-5.604 3.262c-.438 1.274-.493 2.778-.23 4.108zM12 13a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+                        Ambiente 100% Seguro · Checkout Kiwify
+                    </p>
+                </div>
+
+                <!-- Benefícios Rápidos em Chips -->
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-8 mt-10 text-xs sm:text-sm text-slate-300 font-semibold">
+                    <span class="flex items-center gap-2 bg-slate-800/60 border border-slate-700/50 px-3.5 py-1.5 rounded-full">
+                        <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        Garantia de 7 dias
+                    </span>
+                    <span class="flex items-center gap-2 bg-slate-800/60 border border-slate-700/50 px-3.5 py-1.5 rounded-full">
+                        <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        Entrega expressa em 48h
+                    </span>
+                    <span class="flex items-center gap-2 bg-slate-800/60 border border-slate-700/50 px-3.5 py-1.5 rounded-full">
+                        <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        Sem taxas mensais oculta
+                    </span>
+                </div>
             </div>
         </section>
 
-        <!-- Benefits Section -->
-        <section class="bg-white border-y border-slate-200 py-16">
-            <div class="max-w-5xl mx-auto px-4">
-                <h2 class="text-3xl font-extrabold text-center text-brand-dark mb-12">
-                    Tudo que você precisa para vender online
-                </h2>
-                <div class="grid md:grid-cols-3 gap-8 mb-12">
+        <!-- Seção de Benefícios Otimizada -->
+        <section class="bg-white py-20 border-b border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-brand-green font-bold text-xs uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">Por que investir?</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-brand-dark mt-3 mb-4">
+                        Tudo que sua empresa precisa para dominar o mercado online
+                    </h2>
+                    <p class="text-slate-600 text-base md:text-lg">
+                        Estruturamos sua página utilizando gatilhos mentais e técnicas comprovadas de conversão.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-14">
                     <!-- Card 1 -->
-                    <div class="border border-slate-100 bg-slate-50 p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-200">
-                        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
-                            <span class="text-2xl">⏳</span>
+                    <div class="card-hover-effect bg-slate-50/80 border border-slate-200/80 p-8 rounded-3xl relative overflow-hidden">
+                        <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-md text-2xl">
+                            ⚡
                         </div>
-                        <h3 class="text-xl font-bold mb-2">Página pronta em 48 horas</h3>
-                        <p class="text-slate-600">Você envia o conteúdo e em 2 dias sua página está no ar vendendo.</p>
+                        <h3 class="text-xl font-bold text-brand-dark mb-3">Entrega Recorde em 48h</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Envie suas informações e fotos. Em apenas 2 dias úteis sua página estará pronta no ar para começar a receber clientes.
+                        </p>
                     </div>
+
                     <!-- Card 2 -->
-                    <div class="border border-slate-100 bg-slate-50 p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-200">
-                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-                            <span class="text-2xl">📈</span>
+                    <div class="card-hover-effect bg-slate-50/80 border border-slate-200/80 p-8 rounded-3xl relative overflow-hidden">
+                        <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-green-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-md text-2xl">
+                            🎯
                         </div>
-                        <h3 class="text-xl font-bold mb-2">Feita para converter</h3>
-                        <p class="text-slate-600">Textos e estrutura pensados para transformar visita em pedido no WhatsApp.</p>
+                        <h3 class="text-xl font-bold text-brand-dark mb-3">Design Focado em Conversão</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Não é só um visual bonito: criamos layouts estratégicos desenhados para guiar o visitante até o botão de compra.
+                        </p>
                     </div>
+
                     <!-- Card 3 -->
-                    <div class="border border-slate-100 bg-slate-50 p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-200">
-                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                            <span class="text-2xl">💬</span>
+                    <div class="card-hover-effect bg-slate-50/80 border border-slate-200/80 p-8 rounded-3xl relative overflow-hidden">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-md text-2xl">
+                            💬
                         </div>
-                        <h3 class="text-xl font-bold mb-2">WhatsApp integrado</h3>
-                        <p class="text-slate-600">Botão direto para o seu número em toda a página.</p>
+                        <h3 class="text-xl font-bold text-brand-dark mb-3">WhatsApp Direct 1-Click</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Integração com mensagens pré-formatadas para que o cliente clique e já inicie a conversa com você no WhatsApp.
+                        </p>
                     </div>
                 </div>
+
                 <div class="text-center">
-                    <a href="https://pay.kiwify.com.br/g4df72A" class="inline-block bg-brand-green hover:bg-brand-greenHover text-white text-lg font-bold px-8 py-4 rounded-xl shadow-md hover:shadow-lg transition duration-200 w-full sm:w-auto uppercase tracking-wide">
-QUERO MINHA LANDING PAGE AGORA
+                    <a href="https://pay.kiwify.com.br/g4df72A" target="_blank" class="btn-cta-primary text-white text-base md:text-lg font-extrabold px-10 py-4 rounded-xl shadow-lg inline-flex items-center justify-center gap-2 uppercase tracking-wide">
+                        <span>GARANTIR MINHA PÁGINA AGORA</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Demo / Flyer Section -->
-        <section class="max-w-5xl mx-auto px-4 py-16 text-center hero-section">
-            <h2 class="text-3xl font-extrabold text-brand-dark mb-4">Veja como funciona na prática</h2>
-            <p class="text-slate-600 mb-6 max-w-xl mx-auto">Para empresários de qualquer nicho: piscinas, estética, obras, serviços locais, comércio.</p>
-            <a href="https://wa.me/554896029392" class="inline-block bg-brand-green hover:bg-brand-greenHover text-white text-lg font-bold px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition duration-200 uppercase tracking-wide mb-10">
-                Contato ao vivo no WhatsApp
-            </a>
-            <div class="max-w-lg mx-auto bg-white p-4 rounded-2xl border border-slate-200 shadow-lg">
-                <img src="assets/flyer-novo.png" alt="Flyer promocional da Marcondes Mídia" class="w-full h-auto rounded-xl">
+        <!-- Seção de Demonstração / Flyer -->
+        <section class="max-w-5xl mx-auto px-4 py-20 text-center">
+            <div class="bg-gradient-to-br from-slate-900 to-brand-dark text-white rounded-3xl p-8 md:p-12 shadow-2xl border border-slate-800">
+                <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-800/60 mb-4 inline-block">Proposta prática</span>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Perfeito para qualquer tipo de negócio</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto text-sm md:text-base">
+                    Prestadores de serviço, lojas locais, clínicas, profissionais liberais e consultorias.
+                </p>
+
+                <div class="max-w-md mx-auto bg-slate-800/80 p-3 rounded-2xl border border-slate-700/60 shadow-xl mb-8">
+                    <img src="assets/flyer-novo.png" alt="Flyer promocional Marcondes Mídia" class="w-full h-auto rounded-xl">
+                </div>
+
+                <a href="https://wa.me/554896029392" target="_blank" class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3.5 rounded-xl transition duration-200 shadow-lg text-sm md:text-base">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                    <span>Falar diretamente com especialista</span>
+                </a>
             </div>
         </section>
 
-        <!-- Portfolio Section -->
-        <section class="bg-white border-t border-slate-200 py-16">
-            <div class="max-w-5xl mx-auto px-4">
-                <h2 class="text-3xl font-extrabold text-center text-brand-dark mb-2">Veja alguns trabalhos</h2>
-                <p class="text-slate-600 text-center mb-12">Páginas que já entregamos para clientes reais — e os resultados que geraram.</p>
+        <!-- Portfólio Otimizado com Visual Cards -->
+        <section class="bg-white py-20 border-t border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-brand-green font-bold text-xs uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">Projetos Entregues</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-brand-dark mt-3 mb-4">Veja quem já confia no nosso trabalho</h2>
+                    <p class="text-slate-600 text-base">Páginas reais criadas e otimizadas para nossos parceiros comerciais.</p>
+                </div>
 
                 <div class="grid md:grid-cols-3 gap-8 mb-12">
                     <!-- Portfolio Card 1 -->
-                    <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-200">
-                        <img src="./assets/viacivil_cover.webp" alt="Acquaprime" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-dark mb-2">Via Civil</h3>
-                            <p class="text-slate-600 text-sm mb-4">Descrição do Projeto Via Civil</p>
-                            <span class="inline-block bg-green-100 text-green-800 text-xs font-bold px-3 py-1.5 rounded-full">Sinalização viária de alta qualidade</span>
+                    <div class="card-hover-effect bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden group">
+                                <img src="./assets/viacivil_cover.webp" alt="Via Civil" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                    <span class="text-white text-xs font-bold">Projeto de Alta Performance</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-brand-dark mb-2">Via Civil</h3>
+                                <p class="text-slate-500 text-xs mb-4">Sinalização e Engenharia Viária</p>
+                                <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Sinalização de Alta Qualidade</span>
+                            </div>
                         </div>
                     </div>
+
                     <!-- Portfolio Card 2 -->
-                    <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-200">
-                        <img src="./assets/elgmanutencao_cover.webp" alt="ELG Manutenção" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-dark mb-2">ELG Manutenção</h3>
-                            <p class="text-slate-600 text-sm mb-4">Descrição do Projeto ELG Manutenção</p>
-                            <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-full">Agendamentos via WhatsApp</span>
+                    <div class="card-hover-effect bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden group">
+                                <img src="./assets/elgmanutencao_cover.webp" alt="ELG Manutenção" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                    <span class="text-white text-xs font-bold">Agendamento via WhatsApp</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-brand-dark mb-2">ELG Manutenção</h3>
+                                <p class="text-slate-500 text-xs mb-4">Serviços e Manutenção Especializada</p>
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Captação Diária de Agendamentos</span>
+                            </div>
                         </div>
                     </div>
+
                     <!-- Portfolio Card 3 -->
-                    <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-200">
-                        <img src="./assets/grupogplan_cover.webp" alt="Grupo Gplan" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-dark mb-2">Grupo Gplan</h3>
-                            <p class="text-slate-600 text-sm mb-4">Descrição do Projeto Grupo Gplan</p>
-                            <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1.5 rounded-full">Credibilidade para fechar obras</span>
+                    <div class="card-hover-effect bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden group">
+                                <img src="./assets/grupogplan_cover.webp" alt="Grupo Gplan" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                    <span class="text-white text-xs font-bold">Aumento na Conversão</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-brand-dark mb-2">Grupo Gplan</h3>
+                                <p class="text-slate-500 text-xs mb-4">Obras e Construção Civil</p>
+                                <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">Credibilidade para Fechamento de Obras</span>
+                            </div>
                         </div>
                     </div>
+
                     <!-- Portfolio Card 4 -->
-                    <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-200">
-                        <img src="./assets/spmserralheria24hs_cover.webp" alt="SPM 24hs" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-dark mb-2">SPM 24hs</h3>
-                            <p class="text-slate-600 text-sm mb-4">Descrição do Projeto SPM 24hs</p>
-                            <span class="inline-block bg-green-100 text-green-800 text-xs font-bold px-3 py-1.5 rounded-full">Destaque em Serviços locais</span>
+                    <div class="card-hover-effect bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden group">
+                                <img src="./assets/spmserralheria24hs_cover.webp" alt="SPM 24hs" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-brand-dark mb-2">SPM 24hs</h3>
+                                <p class="text-slate-500 text-xs mb-4">Serralheria e Emergências 24h</p>
+                                <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Destaque em Serviços Locais</span>
+                            </div>
                         </div>
                     </div>
+
                     <!-- Portfolio Card 5 -->
-                    <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-200">
-                        <img src="./assets/cintiterraplanagem_cover.webp" alt="Cinti Terraplanagem" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-dark mb-2">Cinti Terraplanagem</h3>
-                            <p class="text-slate-600 text-sm mb-4">Descrição do Projeto Cinti Terraplanagem</p>
-                            <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-full">Posicionamento forte na região</span>
+                    <div class="card-hover-effect bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden group">
+                                <img src="./assets/cintiterraplanagem_cover.webp" alt="Cinti Terraplanagem" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-brand-dark mb-2">Cinti Terraplanagem</h3>
+                                <p class="text-slate-500 text-xs mb-4">Terraplanagem e Locação de Maquinário</p>
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Posicionamento Forte Regional</span>
+                            </div>
                         </div>
                     </div>
+
                     <!-- Portfolio Card 6 -->
-                    <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-200">
-                        <img src="./assets/remistech_cover.webp" alt="Remistech" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-dark mb-2">Remistech</h3>
-                            <p class="text-slate-600 text-sm mb-4">Descrição do Projeto Remistech</p>
-                            <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1.5 rounded-full">Mais conversões e leads</span>
+                    <div class="card-hover-effect bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden group">
+                                <img src="./assets/remistech_cover.webp" alt="Remistech" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-brand-dark mb-2">Remistech</h3>
+                                <p class="text-slate-500 text-xs mb-4">Tecnologia e Soluções Digitais</p>
+                                <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">Mais Conversões e Leads Qualificados</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="text-center">
-                    <a href="https://pay.kiwify.com.br/g4df72A" class="inline-block bg-brand-green hover:bg-brand-greenHover text-white text-lg font-bold px-8 py-4 rounded-xl shadow-md hover:shadow-lg transition duration-200 w-full sm:w-auto uppercase tracking-wide">
-QUERO MINHA LANDING PAGE AGORA
+                    <a href="https://pay.kiwify.com.br/g4df72A" target="_blank" class="btn-cta-primary text-white text-base md:text-lg font-extrabold px-10 py-4 rounded-xl shadow-lg inline-flex items-center justify-center gap-2 uppercase tracking-wide">
+                        <span>QUERO UM SITE COMO ESSES</span>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Plans & Pricing Section -->
-        <section class="max-w-5xl mx-auto px-4 py-16">
-            <h2 class="text-3xl font-extrabold text-center text-brand-dark mb-12">Escolha como quer começar</h2>
+        <!-- Seção de Planos e Preços Reformulada -->
+        <section class="max-w-6xl mx-auto px-4 py-20">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-green font-bold text-xs uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">Transparência total</span>
+                <h2 class="text-3xl md:text-4xl font-black text-brand-dark mt-3">Escolha o plano ideal para seu momento</h2>
+            </div>
 
             <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Plan 1 -->
-                <div class="border-2 border-brand-green bg-white rounded-3xl p-8 shadow-xl relative overflow-hidden flex flex-col justify-between">
-                    <div class="absolute top-0 right-0 bg-brand-green text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl uppercase tracking-wider">Mais escolhido</div>
+                <!-- Plano 1: Mais Vendido -->
+                <div class="bg-white border-2 border-emerald-500 rounded-3xl p-8 shadow-xl relative overflow-hidden flex flex-col justify-between transform hover:-translate-y-1 transition-transform">
+                    <div class="absolute top-0 right-0 bg-gradient-to-l from-emerald-600 to-green-500 text-white text-xs font-black px-5 py-1.5 rounded-bl-xl uppercase tracking-wider shadow-sm">
+                        Mais Escolhido 🔥
+                    </div>
                     <div>
-                        <h3 class="text-2xl font-black text-brand-dark mb-2">Site ou landing page</h3>
-                        <p class="text-slate-500 text-sm mb-6">Entrega rápida para começar a captar clientes.</p>
-                        <p class="text-4xl font-black text-brand-dark mb-1">R$ 119,90</p>
-                        <p class="text-xs text-slate-500 font-medium mb-6">Pagamento único · entrega em 48h</p>
+                        <h3 class="text-2xl font-black text-brand-dark mb-1">Landing Page Individual</h3>
+                        <p class="text-slate-500 text-xs mb-6">A solução perfeita para colocar seu negócio na internet.</p>
 
-                        <ul class="space-y-3 mb-8 text-sm font-medium text-slate-600">
-                            <li class="flex items-center gap-2">✓ Página completa e responsiva</li>
-                            <li class="flex items-center gap-2">✓ Textos focados em conversão</li>
-                            <li class="flex items-center gap-2">✓ Botão de WhatsApp integrado</li>
-                            <li class="flex items-center gap-2">✓ Suporte após a publicação</li>
+                        <div class="flex items-baseline gap-1 mb-1">
+                            <span class="text-slate-400 text-lg line-through font-semibold">R$ 497</span>
+                            <span class="text-4xl font-black text-brand-dark">R$ 119,90</span>
+                        </div>
+                        <p class="text-xs text-emerald-600 font-bold mb-6">✓ Pagamento Único · Entrega em 48h</p>
+
+                        <div class="h-px bg-slate-100 mb-6"></div>
+
+                        <ul class="space-y-3.5 mb-8 text-sm font-medium text-slate-700">
+                            <li class="flex items-center gap-2.5">
+                                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Página 100% responsiva (celular e PC)</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Copywriting profissional (textos que vendem)</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Botão e integração de WhatsApp</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Suporte e ajustes pós-publicação</span>
+                            </li>
                         </ul>
                     </div>
-                    <a href="https://pay.kiwify.com.br/g4df72A" class="block text-center bg-brand-green hover:bg-brand-greenHover text-white font-extrabold py-4 px-6 rounded-xl transition duration-200 shadow-md uppercase tracking-wide">
-QUERO MINHA LANDING PAGE AGORA
+                    <a href="https://pay.kiwify.com.br/g4df72A" target="_blank" class="btn-cta-primary block text-center text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg uppercase tracking-wide">
+                        QUERO MINHA LANDING PAGE AGORA
                     </a>
                 </div>
 
-                <!-- Plan 2 -->
-                <div class="border border-slate-200 bg-white rounded-3xl p-8 shadow-lg flex flex-col justify-between">
+                <!-- Plano 2: Completo com Tráfego -->
+                <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-lg flex flex-col justify-between transform hover:-translate-y-1 transition-transform">
                     <div>
-                        <h3 class="text-2xl font-black text-brand-dark mb-2">Landing page + tráfego pago</h3>
-                        <p class="text-slate-500 text-sm mb-6">Sua página aliada a campanhas assertivas.</p>
-                        <p class="text-4xl font-black text-brand-dark mb-1">R$ 800/mês</p>
-                        <p class="text-xs text-slate-500 font-medium mb-6">Mensalidade · gestão contínua de anúncios</p>
+                        <h3 class="text-2xl font-black text-brand-dark mb-1">Landing Page + Tráfego Pago</h3>
+                        <p class="text-slate-500 text-xs mb-6">Estrutura completa com anúncios ativos no Google e Meta.</p>
 
-                        <ul class="space-y-3 mb-8 text-sm font-medium text-slate-600">
-                            <li class="flex items-center gap-2">✓ Tudo da landing page</li>
-                            <li class="flex items-center gap-2">✓ Campanhas no Instagram, Facebook e Google</li>
-                            <li class="flex items-center gap-2">✓ Criativos e textos dos anúncios</li>
-                            <li class="flex items-center gap-2">✓ Otimização mensal + relatório</li>
+                        <div class="flex items-baseline gap-1 mb-1">
+                            <span class="text-4xl font-black text-brand-dark">R$ 800</span>
+                            <span class="text-slate-500 text-sm font-semibold">/mês</span>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium mb-6">Gestão Contínua + Campanhas Ativas</p>
+
+                        <div class="h-px bg-slate-100 mb-6"></div>
+
+                        <ul class="space-y-3.5 mb-8 text-sm font-medium text-slate-700">
+                            <li class="flex items-center gap-2.5">
+                                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span><strong>Tudo da Landing Page</strong> incluso</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Gestão de Anúncios no Instagram/Facebook/Google</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Criação dos criativos e artes para os anúncios</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Relatório mensal de métricas e vendas</span>
+                            </li>
                         </ul>
                     </div>
                     <div>
-                        <a href="https://wa.me/554896029392" class="block text-center bg-brand-green hover:bg-brand-greenHover text-white font-extrabold py-4 px-6 rounded-xl transition duration-200 shadow-md uppercase tracking-wide mb-3">
+                        <a href="https://wa.me/554896029392" target="_blank" class="block text-center bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-6 rounded-2xl transition duration-200 shadow-md uppercase tracking-wide">
                             SOLICITAR TRÁFEGO PAGO
                         </a>
-                        <p class="text-xs text-slate-600 text-center italic mt-2">Obs.: R$ 400,00 do valor da mensalidade são destinados à verba de anúncios, paga diretamente às plataformas.</p>
+                        <p class="text-[11px] text-slate-500 text-center italic mt-2.5">R$ 400,00 da mensalidade vão direto para verba de anúncios nas plataformas.</p>
                     </div>
-                </div>
-                <style>
-                    .trafego-pago-container > div:last-child {
-                        background-color: white !important;
-                        padding: 1rem !important;
-                    }
-                </style>
                 </div>
             </div>
         </section>
 
-        <!-- Evaluation Form Section -->
-        <section class="evaluation-section text-white py-16 border-t border-slate-800">
-            <div class="max-w-md mx-auto px-4">
-                <div class="evaluation-card rounded-3xl p-8 border border-slate-700">
-                    <h2 class="text-3xl font-extrabold text-center mb-2 tracking-tight">Avaliação gratuita do seu negócio</h2>
-                    <p class="text-slate-300 text-center mb-4 text-sm leading-relaxed">
-                        Envie o nome da sua empresa e o seu WhatsApp. Eu analiso a sua presença online e retorno com um diagnóstico direto: o que falta para você vender mais.
-                    </p>
-                    <p class="text-amber-400 text-center mb-8 text-xs font-black uppercase tracking-wider">
-                        Sem custo · sem compromisso · retorno em até 24h
-                    </p>
+        <!-- Formulário de Avaliação Gratuita High-Tech -->
+        <section id="avaliacao" class="evaluation-section text-white py-20 border-t border-slate-800">
+            <div class="max-w-lg mx-auto px-4">
+                <div class="evaluation-card rounded-3xl p-8 sm:p-10 relative">
+                    <div class="text-center mb-8">
+                        <span class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Diagnóstico 100% Grátis</span>
+                        <h2 class="text-2xl sm:text-3xl font-black tracking-tight mt-2 mb-2">Avaliação Gratuita do Seu Negócio</h2>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            Envie o nome da sua empresa e WhatsApp. Analisamos sua presença digital e enviamos um diagnóstico completo para vender mais.
+                        </p>
+                    </div>
 
-                    <form id="evaluation-form" class="space-y-5">
+                    <form id="evaluation-form" class="space-y-4">
                         <div>
-                            <label for="company-name" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Nome da empresa</label>
-                            <input type="text" id="company-name" name="company-name" required class="evaluation-input w-full rounded-xl px-4 py-3 text-white focus:outline-none text-base" placeholder="Ex: Minha Empresa Ltda">
+                            <label for="company-name" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Nome da Empresa</label>
+                            <input type="text" id="company-name" name="company-name" required class="evaluation-input w-full rounded-xl px-4 py-3.5 text-white text-sm" placeholder="Ex: Marcondes Serviços">
                         </div>
                         <div>
-                            <label for="whatsapp-number" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Número de WhatsApp</label>
-                            <input type="text" id="whatsapp-number" name="whatsapp-number" required class="evaluation-input w-full rounded-xl px-4 py-3 text-white focus:outline-none text-base" placeholder="(00) 00000-0000">
+                            <label for="whatsapp-number" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Seu WhatsApp</label>
+                            <input type="tel" id="whatsapp-number" name="whatsapp-number" required class="evaluation-input w-full rounded-xl px-4 py-3.5 text-white text-sm" placeholder="(48) 99999-9999">
                         </div>
 
-                        <!-- Caixa de Verificação/Confirmação (Preview Box) -->
-                        <div id="preview-box" class="preview-box p-4 rounded-xl border border-dashed border-emerald-500 bg-emerald-950/40 text-sm space-y-2 text-slate-100">
-                            <p class="font-extrabold text-brand-green uppercase tracking-wider text-xs">Confirme sua Mensagem:</p>
-                            <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-800/80 font-mono text-xs whitespace-pre-wrap select-all text-slate-200" id="preview-text"></div>
-                            <p class="text-xs text-slate-400 leading-normal">Se estiver tudo correto, clique no botão abaixo para me enviar diretamente no WhatsApp!</p>
+                        <!-- Preview Box -->
+                        <div id="preview-box" class="preview-box p-4 rounded-xl border border-dashed border-emerald-500/60 bg-emerald-950/40 text-sm space-y-2 text-slate-100">
+                            <p class="font-extrabold text-emerald-400 uppercase tracking-wider text-xs">Confirme os dados para envio:</p>
+                            <div class="bg-slate-900/90 p-3 rounded-lg border border-slate-800 font-mono text-xs whitespace-pre-wrap select-all text-slate-200" id="preview-text"></div>
+                            <p class="text-[11px] text-slate-400">Tudo pronto! Ao clicar abaixo você será direcionado ao nosso WhatsApp.</p>
                         </div>
 
-                        <button type="submit" id="submit-btn" class="w-full bg-brand-green hover:bg-brand-greenHover text-white font-extrabold py-4 rounded-xl shadow-lg transition duration-200 uppercase tracking-wide flex items-center justify-center gap-2">
-                            <span>Quero minha avaliação gratuita</span>
+                        <button type="submit" id="submit-btn" class="btn-cta-primary w-full text-white font-black py-4 rounded-xl shadow-lg uppercase tracking-wider text-sm flex items-center justify-center gap-2">
+                            <span>SOLICITAR AVALIAÇÃO GRATUITA</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </button>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- Final CTA Section -->
-        <section class="max-w-4xl mx-auto px-4 py-16 text-center">
-            <h2 class="text-3xl font-extrabold text-brand-dark mb-6 leading-snug">
-                Última chamada: garanta por <span class="text-brand-green">R$ 119,90</span> antes que o preço suba
+        <!-- CTA Final -->
+        <section class="max-w-4xl mx-auto px-4 py-20 text-center">
+            <h2 class="text-3xl sm:text-4xl font-black text-brand-dark mb-6 leading-tight">
+                Garanta sua Landing Page por apenas <span class="text-brand-green">R$ 119,90</span> antes do encerramento da promoção
             </h2>
-            <a href="https://pay.kiwify.com.br/g4df72A" class="inline-block bg-brand-green hover:bg-brand-greenHover text-white text-lg md:text-xl font-extrabold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 w-full sm:w-auto uppercase tracking-wide">
-                GARANTIR MINHA LANDING PAGE AGORA
-            </a>
-            <div class="flex justify-center gap-6 mt-6 text-xs text-slate-500 font-bold uppercase tracking-wider">
-                <span>Garantia de 7 dias</span>
+
+            <div class="max-w-md mx-auto space-y-4">
+                <a href="https://pay.kiwify.com.br/g4df72A" target="_blank" class="btn-cta-primary animate-pulse-glow text-white text-lg font-black py-4 px-8 rounded-2xl shadow-xl w-full flex items-center justify-center gap-2 uppercase tracking-wide">
+                    <span>GARANTIR O MEU SITE AGORA</span>
+                </a>
+            </div>
+
+            <div class="flex justify-center gap-6 mt-8 text-xs text-slate-500 font-bold uppercase tracking-wider">
+                <span>Garantia de 7 Dias</span>
                 <span>•</span>
-                <span>pagamento único</span>
+                <span>Pagamento Único</span>
                 <span>•</span>
-                <span>entrega em 48h</span>
+                <span>Suporte Dedicado</span>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
     <footer class="bg-brand-dark text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-center md:text-left">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-center md:text-left">
             <div>
                 <span class="text-white text-lg font-black tracking-tight block mb-1">Marcondes Mídia</span>
                 <p class="text-xs text-slate-500">© 2026 Marcondes Mídia. Todos os direitos reservados.</p>
             </div>
 
             <div class="flex flex-wrap justify-center gap-6 font-semibold">
-                <a href="https://wa.me/554896029392" class="hover:text-white transition duration-150 flex items-center gap-1.5">
+                <a href="https://wa.me/554896029392" target="_blank" class="hover:text-white transition duration-150 flex items-center gap-1.5">
                     <span>(48) 9602-9392</span>
                 </a>
-                <a href="https://www.instagram.com/marcondes.machado.oficial/" class="hover:text-white transition duration-150 flex items-center gap-1.5">
+                <a href="https://www.instagram.com/marcondes.machado.oficial/" target="_blank" class="hover:text-white transition duration-150 flex items-center gap-1.5">
                     <span>@marcondes.machado.oficial</span>
                 </a>
             </div>
         </div>
     </footer>
 
-    <!-- Botão flutuante de WhatsApp -->
-    <a href="https://wa.me/554896029392" class="whatsapp-float" aria-label="Contato pelo WhatsApp" target="_blank">
-        <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+    <!-- Botão Flutuante do WhatsApp -->
+    <a href="https://wa.me/554896029392" class="whatsapp-float group" aria-label="Contato pelo WhatsApp" target="_blank">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
             <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
         </svg>
-        <span>(48) 9602-9392</span>
+        <span class="hidden sm:inline">(48) 9602-9392</span>
     </a>
 
-    <!-- Script para controle do formulário de avaliação gratuita -->
+    <!-- Scripts da Página -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Formatação do WhatsApp no input
+            const phoneInput = document.getElementById('whatsapp-number');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+                    e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+                });
+            }
+
+            // Lógica do formulário
             const form = document.getElementById('evaluation-form');
             const previewBox = document.getElementById('preview-box');
             const previewText = document.getElementById('preview-text');
@@ -458,8 +671,8 @@ QUERO MINHA LANDING PAGE AGORA
                 if (!isPreviewMode) {
                     previewText.textContent = textMessage;
                     previewBox.style.display = 'block';
-                    submitBtn.innerHTML = '<span>Confirmar e Enviar no WhatsApp 🚀</span>';
-                    submitBtn.classList.remove('bg-brand-green', 'hover:bg-brand-greenHover');
+                    submitBtn.innerHTML = '<span>CONFIRMAR E ENVIAR NO WHATSAPP 🚀</span>';
+                    submitBtn.classList.remove('btn-cta-primary');
                     submitBtn.classList.add('bg-amber-500', 'hover:bg-amber-600');
                     isPreviewMode = true;
                 } else {
@@ -469,9 +682,9 @@ QUERO MINHA LANDING PAGE AGORA
 
                     form.reset();
                     previewBox.style.display = 'none';
-                    submitBtn.innerHTML = '<span>Quero minha avaliação gratuita</span>';
+                    submitBtn.innerHTML = '<span>SOLICITAR AVALIAÇÃO GRATUITA</span>';
                     submitBtn.classList.remove('bg-amber-500', 'hover:bg-amber-600');
-                    submitBtn.classList.add('bg-brand-green', 'hover:bg-brand-greenHover');
+                    submitBtn.classList.add('btn-cta-primary');
                     isPreviewMode = false;
                 }
             });
@@ -481,9 +694,9 @@ QUERO MINHA LANDING PAGE AGORA
                 input.addEventListener('input', () => {
                     if (isPreviewMode) {
                         previewBox.style.display = 'none';
-                        submitBtn.innerHTML = '<span>Quero minha avaliação gratuita</span>';
+                        submitBtn.innerHTML = '<span>SOLICITAR AVALIAÇÃO GRATUITA</span>';
                         submitBtn.classList.remove('bg-amber-500', 'hover:bg-amber-600');
-                        submitBtn.classList.add('bg-brand-green', 'hover:bg-brand-greenHover');
+                        submitBtn.classList.add('btn-cta-primary');
                         isPreviewMode = false;
                     }
                 });
